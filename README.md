@@ -14,5 +14,5 @@ nodejs, postgress
 ## Running the tests
 
 * Create separate database
-* Create `config.json` file based on `configExample.json`, fill in the `testing` section of `config.json`
+* Create `config.json` file based on [configExample.json](./configExample.json), fill in the `testing` section of `config.json`
 * Run `npm run test`

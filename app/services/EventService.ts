@@ -36,7 +36,7 @@ export default class EventService {
             endDate: {type: "date", convert: true, optional: true},
             $$strict: true,
         });
-        const event = await Event.findByPrimary(eventId);
+        const event = await Event.findOne({where: {id: eventId}});
         if (!event) {
             throw new APIError(ErrorList.EventNotFound, {meta: {eventId}});
         }
@@ -52,7 +52,7 @@ export default class EventService {
             eventId: {type: "uuid"},
             $$strict: true,
         });
-        const event = await Event.findByPrimary(eventId);
+        const event = await Event.findOne({where: {id: eventId}});
         if (!event) {
             throw new APIError(ErrorList.EventNotFound, {meta: {eventId}});
         }

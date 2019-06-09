@@ -31,7 +31,7 @@ export default class UserService {
             userData.password = await this.encryptPassword(userData.password as string);
             userData.email = (userData.email as string).toLowerCase();
 
-            if (await User.find({where: {email: userData.email}, transaction})) {
+            if (await User.findOne({where: {email: userData.email}, transaction})) {
                 throw ErrorList.UserAlreadyExists;
             }
 

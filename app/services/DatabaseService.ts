@@ -63,12 +63,13 @@ export class DatabaseService {
         await this.initPromise;
     }
 
+    // TODO: Update sequelize typings and get rid of "any"
     public async inTransaction<T>(transactionOptions: TransactionOptions,
-                                  task: (transaction: Transaction) => Promise<T>,
+                                  task: (transaction: any) => Promise<T>,
                                   transactionFailLimit: number = 5): Promise<T> {
         let transactionFailCount = 0;
         do {
-            const transaction = await this.sequelizeTypescript.transaction(transactionOptions);
+            const transaction = await this.sequelizeTypescript.transaction(transactionOptions as any) as Transaction;
             try {
                 const result: T = await task(transaction);
                 await transaction.commit();
@@ -102,7 +103,7 @@ export class DatabaseService {
 
     private isSerializationError(e: any): boolean {
         if (Array.isArray(e)) {
-            for (const i in e) {
+            for (const i in e as Array<any>) {
                 if (this.isSerializationError(e[i])) {
                     return true;
                 }
@@ -122,11 +123,12 @@ export class DatabaseService {
         await this.applyMigrations("up");
     }
 
+    // TODO: Update sequelize typings and get rid of "any"
     private getMigrator(dir: string): Umzug.Umzug {
         return new Umzug({
             storage: "sequelize",
             storageOptions: {
-                sequelize: this.sequelizeTypescript,
+                sequelize: this.sequelizeTypescript as any,
             },
             logging: (result: any) => {
                 this.logger.debug(result);
