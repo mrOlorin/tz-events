@@ -6,7 +6,7 @@ import Event from "../models/Event";
 import ValidationService from "./ValidationService";
 import {APIError} from "../core/APIError";
 import {ErrorList} from "../ErrorList";
-import {operatorsAliases as Op} from "./DatabaseService/sequelizeOperatorAliases";
+import {Op} from "./DatabaseService/operatorAliases";
 
 @injectable()
 export default class EventService {
@@ -80,11 +80,11 @@ export default class EventService {
     private async eventNameOccupied(eventName: string, exceptForId?: string): Promise<boolean> {
         const options: any = {
             where: {
-                name: {[Op.$like]: eventName}
+                name: {[Op.like]: eventName}
             }
         };
         if (exceptForId) {
-            options.where.id = {[Op.$ne]: exceptForId};
+            options.where.id = {[Op.ne]: exceptForId};
         }
         return !!await Event.findOne(options);
     }

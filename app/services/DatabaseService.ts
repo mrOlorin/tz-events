@@ -8,7 +8,6 @@ import {DatabaseConfig} from "../config/DatabaseConfig";
 import {TYPES} from "../core/ioc/types";
 import {Logger} from "../core/Logger";
 import {ErrorList} from "../ErrorList";
-import {operatorsAliases} from "./DatabaseService/sequelizeOperatorAliases";
 
 @injectable()
 export class DatabaseService {
@@ -40,7 +39,6 @@ export class DatabaseService {
                     modelPaths: [path.resolve(__dirname, "..", "models")],
                     benchmark: false,
                     logging: false,
-                    operatorsAliases,
                     pool: this.databaseConfig.pool,
                 });
                 await this.sequelizeTypescript.authenticate();
