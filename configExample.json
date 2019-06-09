@@ -1,0 +1,27 @@
+{
+  "local": {
+    "DatabaseConfig": {
+      "host": "localhost",
+      "database": "<FILL>",
+      "username": "<FILL>",
+      "password": "<FILL>",
+      "resetMigrations": false
+    },
+    "AuthConfig": {
+      "authSecret": "SomeSecret",
+      "tokenLifeTimeSeconds": 86400
+    }
+  },
+  "testing": {
+    "ServerConfig": {
+      "port": 1434
+    },
+    "DatabaseConfig": {
+      "host": "localhost",
+      "database": "<FILL>",
+      "username": "<FILL>",
+      "password": "<FILL>",
+      "resetMigrations": true
+    }
+  }
+}
